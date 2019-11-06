@@ -98,8 +98,11 @@ class Menu:
         """
         note_id = input("Enter the note id: ")
         memo = input("Enter the modified note: ")
-        self.notebook.modify_note(int(note_id), memo)
-        print("Note {} is modified".format(note_id))
+        result = self.notebook.modify_note(int(note_id), memo)
+        if result:
+            print("Note {} is modified".format(note_id))
+        else:
+            print("Note ID does not exist, please provide another id")
 
     def modify_tags(self):
         """
@@ -108,8 +111,11 @@ class Menu:
         """
         note_id = input("Enter the note id: ")
         tags = input("Enter the modified tag(s): ")
-        self.notebook.modify_tag(int(note_id), tags)
-        print("Tag {} is modified".format(note_id))
+        result = self.notebook.modify_tag(int(note_id), tags)
+        if result:
+            print("Tag {} is modified".format(note_id))
+        else:
+            print("Note ID does not exist, please provide another id")
 
     @staticmethod
     def quit():

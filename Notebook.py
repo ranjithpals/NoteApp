@@ -53,41 +53,51 @@ class Notebook:
         """
         self.Notes.append(Note(str_memo, str_tags))
 
+    def find_note(self, note_id):
+        """
+        Find the ID of the Note within the Notebook
+        :param note_id:
+        :return: Integer
+        """
+        for note in self.Notes:
+            if note.id == note_id:
+                return note
+        return None
+
     def modify_note(self, note_id, memo):
         """
         Modify an exiting note in a Notebook
         :param note_id:
         :param memo:
-        :return:
+        :return: Boolean (Note is modified or NOT)
         """
-        for note in self.Notes:
-            if note.id == note_id:
-                note.memo = memo
-                break
+        note = self.find_note(note_id)
+        if note:
+            note.memo = memo
+            return True
         else:
-            print("Note ID does not exist, please provide another id")
+            return False
 
     def modify_tag(self, note_id, str_tags):
         """
         Modify the tags associated with an existing Note in a Notebook
         :param note_id:
         :param str_tags:
-        :return:
+        :return: Boolean (Note tag is modified or NOT)
         """
-        for note in self.Notes:
-            if note.id == note_id:
-                note.tags = str_tags
-                break
+        note = self.find_note(note_id)
+        if note:
+            note.tags = str_tags
+            return True
         else:
-            print("Note ID does not exist, please provide another id")
+            return False
 
     def search(self, keyword):
         """
         Search if the keyword exists in Notebook and list the memos containing the Keywords
         :param keyword:
-        :return:
+        :return: list of notes matching the user provided keyword
         """
-
         return [note for note in self.Notes if note.match(keyword)]
 
 
